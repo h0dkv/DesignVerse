@@ -1,137 +1,127 @@
 <!DOCTYPE html>
 <html lang="bg">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Сигурност | DesignRealm</title>
-    <link rel="icon" type="image/png" href="favicon.png">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Сигурност | DesignRealm</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-    <header>
-        <div class="logo">
-            <a href="index.html">
-                <img src="images/logo_notext.png" alt="DesignRealm Logo">
-                <span>DesignRealm</span>
-            </a>
+  <header>
+    <div class="logo">
+      <a href="index.html"><img src="images/logo_notext.png" alt="DesignRealm Logo"><span>DesignRealm</span></a>
+    </div>
+    <nav id="nav">
+      <a href="index.html">Начало</a>
+      <a href="catalog.html">Каталог</a>
+      <a href="profile.html">Профил</a>
+      <a href="favorites.html">Любими</a>
+      <a id="login-link" href="login.html">Вход</a>
+      <a href="admin.html" id="admin-link" style="display:none;">Админ панел</a>
+    </nav>
+    <button id="menu-toggle">☰</button>
+    <div id="dashboard" class="dashboard" style="display:none;">
+      <button id="dashboard-btn"><span class="dash-avatar">👤</span></button>
+      <div id="dashboard-menu" class="dashboard-menu">
+        <p id="user-greeting">Здравей!</p>
+        <a href="favorites.html">❤️ Любими</a>
+        <a href="profile.html">⚙️ Профил</a>
+        <a href="upload.html">Качи модел</a>
+        <button id="logout-btn" class="btn-logout">🚪 Изход</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="security-page">
+    <div class="security-hero">
+      <span class="sec-badge">🔒 Защита на акаунта</span>
+      <h1>Сигурност на <span>акаунта</span></h1>
+      <p>Промяна на парола и управление на достъпа.</p>
+    </div>
+
+    <div class="sec-card">
+      <h3>🔑 Промени парола</h3>
+      <form id="change-password-form">
+        <div class="sec-field">
+          <label>Текуща парола</label>
+          <input type="password" id="current-password" placeholder="Въведи текущата парола">
         </div>
-        <nav id="nav">
-            <a href="index.html">Начало</a>
-            <a href="catalog.html">Каталог</a>
-            <a href="profile.html">Профил</a>
-            <a href="favorites.html">Любими</a>
-            <a id="login-link" href="login.html">Вход</a>
-            <a href="admin.html" id="admin-link" style="display:none;">Админ панел</a>
-        </nav>
-        <button id="menu-toggle">☰</button>
-    </header>
+        <div class="sec-field">
+          <label>Нова парола</label>
+          <input type="password" id="new-password" placeholder="Въведи нова парола">
+        </div>
+        <button type="submit" class="btn" style="width:100%;margin-top:0.5rem;">Промени парола</button>
+      </form>
+    </div>
 
-    <main class="page">
-        <section class="hero">
-            <div class="hero-text">
-                <h1>Сигурност на акаунта</h1>
-                <p class="subtitle">Промяна на парола и управление на достъпа.</p>
-            </div>
-        </section>
+    <div class="sec-card">
+      <h3>⚠️ Изтриване на акаунт</h3>
+      <p style="color:rgba(255,255,255,0.65);font-size:0.95rem;margin-bottom:1.2rem;line-height:1.6;">
+        Изтриването на акаунта е необратимо. Всички ваши модели и данни ще бъдат премахнати завинаги.
+      </p>
+      <button id="delete-account-btn" class="btn-danger-soft">🗑️ Изтрий акаунт</button>
+    </div>
 
-        <section style="max-width:720px;margin:1.5rem auto;">
-            <div class="card">
-                <h3>Промени парола</h3>
-                <form id="change-password-form">
-                    <input type="password" id="current-password" placeholder="Текуща парола">
-                    <input type="password" id="new-password" placeholder="Нова парола">
-                    <button type="submit" class="btn">Промени парола</button>
-                </form>
+    <a href="profile.html" class="btn" style="background:transparent;border:1px solid rgba(255,255,255,0.25);">← Обратно към профила</a>
+  </div>
 
-                <hr style="margin:1rem 0">
+  <footer><p>© 2025 DesignRealm. Всички права запазени.</p></footer>
 
-                <h3>Изтриване на акаунт</h3>
-                <p class="small">Изтриването на акаунта е необратимо. Всички ваши модели и данни ще бъдат премахнати.
-                </p>
-                <button id="delete-account-btn" class="btn danger">Изтрий акаунт</button>
-            </div>
-        </section>
-    </main>
+  <script type="module" src="firebase-init.js"></script>
+  <script type="module" src="auth.js"></script>
+  <script type="module" src="script.js"></script>
+  <script type="module" src="dashboard.js"></script>
+  <script type="module" src="check.js"></script>
+  <script type="module">
+    import { auth, db } from './firebase-init.js';
+    import { onAuthStateChanged, EmailAuthProvider, reauthenticateWithCredential, updatePassword, deleteUser } from 'https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js';
+    import { collection, query, where, getDocs, deleteDoc, doc } from 'https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js';
 
-    <footer>
-        <p>© 2025 DesignRealm. Всички права запазени.</p>
-    </footer>
+    function showToast(message, type = "success") {
+      const existing = document.querySelector(".dr-toast");
+      if (existing) existing.remove();
+      const toast = document.createElement("div");
+      toast.className = `dr-toast dr-toast--${type}`;
+      toast.innerHTML = `<span class="dr-toast__icon">${type === "success" ? "✅" : "❌"}</span><span class="dr-toast__msg">${message}</span>`;
+      document.body.appendChild(toast);
+      requestAnimationFrame(() => toast.classList.add("dr-toast--show"));
+      setTimeout(() => { toast.classList.remove("dr-toast--show"); setTimeout(() => toast.remove(), 400); }, 3500);
+    }
 
-    <script type="module" src="script.js"></script>
-    <script type="module" src="dashboard.js"></script>
-    <script type="module" src="firebase-init.js"></script>
-    <script type="module" src="auth.js"></script>
-    <script type="module" src="check.js"></script>
-    <script type="module">
-        import { auth, db } from './firebase-init.js';
-        import {
-            onAuthStateChanged,
-            EmailAuthProvider,
-            reauthenticateWithCredential,
-            updatePassword,
-            deleteUser
-        } from 'https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js';
-        import { collection, query, where, getDocs, deleteDoc, doc } from 'https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js';
+    onAuthStateChanged(auth, (user) => { if (!user) window.location.href = 'login.html'; });
 
-        const changeForm = document.getElementById('change-password-form');
-        const deleteBtn = document.getElementById('delete-account-btn');
+    document.getElementById('change-password-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const current = document.getElementById('current-password').value;
+      const next = document.getElementById('new-password').value;
+      if (!current || !next) return showToast('Попълнете полетата.', 'error');
+      const user = auth.currentUser;
+      try {
+        await reauthenticateWithCredential(user, EmailAuthProvider.credential(user.email, current));
+        await updatePassword(user, next);
+        showToast('Паролата е успешно променена!');
+        e.target.reset();
+      } catch (err) {
+        showToast('Грешна текуща парола.', 'error');
+      }
+    });
 
-        onAuthStateChanged(auth, (user) => {
-            if (!user) {
-                window.location.href = 'login.html';
-            }
-        });
-
-        changeForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const current = document.getElementById('current-password').value;
-            const next = document.getElementById('new-password').value;
-            if (!current || !next) return alert('Попълнете полетата');
-            const user = auth.currentUser;
-            if (!user) return alert('Трябва да сте влезли.');
-            try {
-                const cred = EmailAuthProvider.credential(user.email, current);
-                await reauthenticateWithCredential(user, cred);
-                await updatePassword(user, next);
-                alert('Паролата е успешно променена.');
-                changeForm.reset();
-            } catch (err) {
-                console.error('Password change failed', err);
-                alert('Грешка: ' + (err.message || err.code));
-            }
-        });
-
-        deleteBtn.addEventListener('click', async () => {
-            const ok = confirm('Наистина ли искате да изтриете акаунта си? Тази операция изтрива всички ваши данни.');
-            if (!ok) return;
-            const user = auth.currentUser;
-            if (!user) return alert('Трябва да сте влезли.');
-            try {
-                // delete user's models
-                const q = query(collection(db, 'models'), where('ownerId', '==', user.uid));
-                const snaps = await getDocs(q);
-                for (const d of snaps.docs) {
-                    await deleteDoc(doc(db, 'models', d.id));
-                }
-                // delete user doc
-                await deleteDoc(doc(db, 'users', user.uid));
-                // delete auth user
-                await deleteUser(user);
-                alert('Акаунтът е изтрит.');
-                window.location.href = 'index.html';
-            } catch (err) {
-                console.error('Account deletion failed', err);
-                if (err && err.code === 'auth/requires-recent-login') {
-                    alert('За сигурност — моля, влезте отново и опитайте пак.');
-                    return;
-                }
-                alert('Грешка при изтриване: ' + (err.message || err.code));
-            }
-        });
-    </script>
-    <script type="module" src="monitor.js"></script>
+    document.getElementById('delete-account-btn').addEventListener('click', async () => {
+      if (!confirm('Наистина ли искате да изтриете акаунта си? Необратимо!')) return;
+      const user = auth.currentUser;
+      try {
+        const snaps = await getDocs(query(collection(db, 'models'), where('uploadedBy', '==', user.uid)));
+        for (const d of snaps.docs) await deleteDoc(doc(db, 'models', d.id));
+        await deleteDoc(doc(db, 'users', user.uid));
+        await deleteUser(user);
+        showToast('Акаунтът е изтрит.');
+        setTimeout(() => window.location.href = 'index.html', 1500);
+      } catch (err) {
+        showToast(err.code === 'auth/requires-recent-login' ? 'Влезте отново и опитайте пак.' : 'Грешка при изтриване.', 'error');
+      }
+    });
+  </script>
+  <script type="module" src="monitor.js"></script>
 </body>
-
 </html>

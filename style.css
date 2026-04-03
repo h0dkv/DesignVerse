@@ -5562,3 +5562,235 @@ body.admin #admin-panel {
 .pending-toolbar input {
   max-width: 320px;
 }
+
+.security-page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 1.5rem 4rem;
+}
+
+.security-hero {
+  text-align: center;
+  padding: 4rem 2rem 2.5rem;
+}
+
+.sec-badge {
+  display: inline-block;
+  padding: 0.35rem 1rem;
+  background: rgba(255, 193, 69, 0.15);
+  border: 1px solid rgba(255, 193, 69, 0.35);
+  border-radius: 30px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 1.2rem;
+  letter-spacing: 0.05em;
+}
+
+.security-hero h1 {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 800;
+  color: #fff;
+  margin: 0 0 0.8rem;
+}
+
+.security-hero h1 span {
+  background: linear-gradient(135deg, var(--accent), #ff9de2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.security-hero p {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 1.05rem;
+}
+
+.sec-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.03));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  padding: 2rem;
+  margin-bottom: 1.2rem;
+  animation: fadeInUp 0.5s ease-out both;
+}
+
+.sec-card:nth-child(1) {
+  animation-delay: .1s
+}
+
+.sec-card:nth-child(2) {
+  animation-delay: .2s
+}
+
+.sec-card h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin: 0 0 1.2rem;
+}
+
+.sec-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+
+.sec-field label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.sec-field input {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 14px;
+  padding: 0.9rem 1rem;
+  color: #fff;
+  font-size: 0.95rem;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.sec-field input::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.sec-field input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(255, 193, 69, 0.15);
+}
+
+.btn-danger-soft {
+  background: rgba(180, 40, 60, 0.15);
+  color: #ffb3b3;
+  border: 1px solid rgba(180, 40, 60, 0.35);
+  padding: 0.8rem 1.5rem;
+  border-radius: 15px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-danger-soft:hover {
+  background: rgba(180, 40, 60, 0.3);
+}
+
+.settings-page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 1.5rem 4rem;
+}
+
+.settings-hero {
+  text-align: center;
+  padding: 4rem 2rem 2.5rem;
+}
+
+.set-badge {
+  display: inline-block;
+  padding: 0.35rem 1rem;
+  background: rgba(255, 193, 69, 0.15);
+  border: 1px solid rgba(255, 193, 69, 0.35);
+  border-radius: 30px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 1.2rem;
+  letter-spacing: 0.05em;
+}
+
+.settings-hero h1 {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 800;
+  color: #fff;
+  margin: 0 0 0.8rem;
+}
+
+.settings-hero h1 span {
+  background: linear-gradient(135deg, var(--accent), #ff9de2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.settings-hero p {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 1.05rem;
+}
+
+.set-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.03));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  padding: 2rem;
+  animation: fadeInUp 0.5s ease-out 0.1s both;
+}
+
+.set-card h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin: 0 0 1.5rem;
+}
+
+.set-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 1.2rem;
+}
+
+.set-field label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.set-field input {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 14px;
+  padding: 0.9rem 1rem;
+  color: #fff;
+  font-size: 0.95rem;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.set-field input::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.set-field input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(255, 193, 69, 0.15);
+}
+
+.set-actions {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+}
+
+.btn-ghost {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #fff;
+  padding: 0.8rem 1.5rem;
+  border-radius: 15px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.08);
+}

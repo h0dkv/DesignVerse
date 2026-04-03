@@ -96,7 +96,7 @@ onAuthStateChanged(auth, async (user) => {
             <div class="meta">${data.fileName || ""} ${data.fileSize ? "• " + formatSize(data.fileSize) : ""} ${data.createdAt ? "• " + formatDate(data.createdAt) : ""}</div>
             <span class="status ${statusClass}">${statusText}</span>
             <div class="upload-item-actions">
-              <a href="preview.html?model=${d.id}" class="btn-sm primary">👁 Преглед</a>
+              <a href="model-view.html?model=${d.id}" class="btn-sm primary">👁 Преглед</a>
               <button class="btn-sm danger del-btn" data-id="${d.id}">🗑️ Изтрий</button>
             </div>
           `;

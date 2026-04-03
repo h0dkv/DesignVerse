@@ -1,140 +1,123 @@
 <!DOCTYPE html>
 <html lang="bg">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Настройки | DesignRealm</title>
-    <link rel="icon" type="image/png" href="favicon.png">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Настройки | DesignRealm</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-    <header>
-        <div class="logo">
-            <a href="index.html">
-                <img src="images/logo_notext.png" alt="DesignRealm Logo">
-                <span>DesignRealm</span>
-            </a>
+  <header>
+    <div class="logo">
+      <a href="index.html"><img src="images/logo_notext.png" alt="DesignRealm Logo"><span>DesignRealm</span></a>
+    </div>
+    <nav id="nav">
+      <a href="index.html">Начало</a>
+      <a href="catalog.html">Каталог</a>
+      <a href="profile.html">Профил</a>
+      <a href="favorites.html">Любими</a>
+      <a id="login-link" href="login.html">Вход</a>
+      <a href="admin.html" id="admin-link" style="display:none;">Админ панел</a>
+    </nav>
+    <button id="menu-toggle">☰</button>
+    <div id="dashboard" class="dashboard" style="display:none;">
+      <button id="dashboard-btn"><span class="dash-avatar">👤</span></button>
+      <div id="dashboard-menu" class="dashboard-menu">
+        <p id="user-greeting">Здравей!</p>
+        <a href="favorites.html">❤️ Любими</a>
+        <a href="profile.html">⚙️ Профил</a>
+        <a href="upload.html">Качи модел</a>
+        <button id="logout-btn" class="btn-logout">🚪 Изход</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="settings-page">
+    <div class="settings-hero">
+      <span class="set-badge">⚙️ Настройки</span>
+      <h1>Настройки на <span>профила</span></h1>
+      <p>Променете информацията, която се показва за вашия акаунт.</p>
+    </div>
+
+    <div class="set-card">
+      <h3>👤 Лична информация</h3>
+      <form id="settings-form">
+        <div class="set-field">
+          <label>Показвано име</label>
+          <input type="text" id="displayName" placeholder="Твоето име">
         </div>
+        <div class="set-field">
+          <label>Линк към профилна снимка</label>
+          <input type="url" id="photoURL" placeholder="https://example.com/photo.jpg">
+        </div>
+        <div class="set-actions">
+          <button type="submit" class="btn">💾 Запази промените</button>
+          <a href="profile.html" class="btn-ghost">Откажи</a>
+        </div>
+      </form>
+      <p style="margin-top:1rem;color:rgba(255,255,255,0.45);font-size:0.85rem;">
+        Промените ще се запазят в акаунта и в потребителския документ.
+      </p>
+    </div>
+  </div>
 
-        <nav id="nav">
-            <a href="index.html">Начало</a>
-            <a href="catalog.html">Каталог</a>
-            <a href="profile.html">Профил</a>
-            <a href="favorites.html">Любими</a>
-            <a id="login-link" href="login.html">Вход</a>
-            <a href="admin.html" id="admin-link" style="display:none;">Админ панел</a>
-        </nav>
+  <footer><p>© 2025 DesignRealm. Всички права запазени.</p></footer>
 
-        <button id="menu-toggle">☰</button>
-    </header>
+  <script type="module" src="firebase-init.js"></script>
+  <script type="module" src="auth.js"></script>
+  <script type="module" src="script.js"></script>
+  <script type="module" src="dashboard.js"></script>
+  <script type="module" src="check.js"></script>
+  <script type="module">
+    import { auth, db } from './firebase-init.js';
+    import { onAuthStateChanged, updateProfile } from 'https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js';
+    import { doc, getDoc, setDoc } from 'https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js';
 
-    <main class="page">
-        <section class="hero">
-            <div class="hero-text">
-                <h1>Настройки на профила</h1>
-                <p class="subtitle">Променете информацията, която се показва за вашия акаунт.</p>
-            </div>
-        </section>
+    function showToast(message, type = "success") {
+      const existing = document.querySelector(".dr-toast");
+      if (existing) existing.remove();
+      const toast = document.createElement("div");
+      toast.className = `dr-toast dr-toast--${type}`;
+      toast.innerHTML = `<span class="dr-toast__icon">${type === "success" ? "✅" : "❌"}</span><span class="dr-toast__msg">${message}</span>`;
+      document.body.appendChild(toast);
+      requestAnimationFrame(() => toast.classList.add("dr-toast--show"));
+      setTimeout(() => { toast.classList.remove("dr-toast--show"); setTimeout(() => toast.remove(), 400); }, 3500);
+    }
 
-        <section style="max-width:720px;margin:1.5rem auto;">
-            <div class="card">
-                <form id="settings-form" class="settings-form">
-                    <label for="displayName">Показвано име</label>
-                    <input type="text" id="displayName" placeholder="Име за показване">
+    const displayNameInput = document.getElementById('displayName');
+    const photoURLInput = document.getElementById('photoURL');
 
-                    <label for="photoURL" style="margin-top:1rem;">Линк към профилна снимка</label>
-                    <input type="url" id="photoURL" placeholder="https://example.com/photo.jpg">
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) { window.location.href = 'login.html'; return; }
+      displayNameInput.value = user.displayName || '';
+      photoURLInput.value = user.photoURL || '';
+      try {
+        const snap = await getDoc(doc(db, 'users', user.uid));
+        if (snap.exists()) {
+          const data = snap.data();
+          if (data.displayName) displayNameInput.value = data.displayName;
+          if (data.photoURL) photoURLInput.value = data.photoURL;
+        }
+      } catch (err) { console.error(err); }
+    });
 
-                    <div style="margin-top:1rem; display:flex; gap:.75rem; flex-wrap:wrap;">
-                        <button type="submit" class="btn">Запази</button>
-                        <a href="profile.html" class="btn ghost">Откажи</a>
-                    </div>
-                </form>
-
-                <p class="small" style="margin-top:1rem;">
-                    Промените ще се запазят в акаунта и в потребителския документ.
-                </p>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <p>© 2025 DesignRealm. Всички права запазени.</p>
-    </footer>
-
-    <script type="module" src="script.js"></script>
-    <script type="module" src="dashboard.js"></script>
-    <script type="module" src="firebase-init.js"></script>
-    <script type="module" src="auth.js"></script>
-    <script type="module" src="check.js"></script>
-
-    <script type="module">
-        import { auth, db } from './firebase-init.js';
-        import { onAuthStateChanged, updateProfile } from 'https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js';
-        import { doc, getDoc, setDoc } from 'https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js';
-
-        const displayNameInput = document.getElementById('displayName');
-        const photoURLInput = document.getElementById('photoURL');
-        const form = document.getElementById('settings-form');
-
-        onAuthStateChanged(auth, async (user) => {
-            if (!user) {
-                window.location.href = 'login.html';
-                return;
-            }
-
-            displayNameInput.value = user.displayName || '';
-            photoURLInput.value = user.photoURL || '';
-
-            try {
-                const userRef = doc(db, 'users', user.uid);
-                const snap = await getDoc(userRef);
-
-                if (snap.exists()) {
-                    const data = snap.data();
-                    displayNameInput.value = data.displayName || displayNameInput.value;
-                    photoURLInput.value = data.photoURL || photoURLInput.value;
-                }
-            } catch (err) {
-                console.error('Failed to load user settings:', err);
-            }
-        });
-
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-
-            const user = auth.currentUser;
-            if (!user) {
-                alert('Трябва да сте влезли.');
-                return;
-            }
-
-            const displayName = displayNameInput.value.trim();
-            const photoURL = photoURLInput.value.trim();
-
-            try {
-                await updateProfile(user, {
-                    displayName: displayName || null,
-                    photoURL: photoURL || null
-                });
-
-                await setDoc(doc(db, 'users', user.uid), {
-                    displayName: displayName || '',
-                    photoURL: photoURL || ''
-                }, { merge: true });
-
-                alert('Профилът е обновен успешно.');
-                window.location.href = 'profile.html';
-            } catch (err) {
-                console.error('Failed to update profile:', err);
-                alert('Грешка при запис на профила.');
-            }
-        });
-    </script>
-
-    <script type="module" src="monitor.js"></script>
+    document.getElementById('settings-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const user = auth.currentUser;
+      if (!user) return showToast('Трябва да сте влезли.', 'error');
+      const displayName = displayNameInput.value.trim();
+      const photoURL = photoURLInput.value.trim();
+      try {
+        await updateProfile(user, { displayName: displayName || null, photoURL: photoURL || null });
+        await setDoc(doc(db, 'users', user.uid), { displayName: displayName || '', photoURL: photoURL || '' }, { merge: true });
+        showToast('Профилът е обновен успешно!');
+        setTimeout(() => window.location.href = 'profile.html', 1500);
+      } catch (err) {
+        showToast('Грешка при запис на профила.', 'error');
+      }
+    });
+  </script>
+  <script type="module" src="monitor.js"></script>
 </body>
-
 </html>
