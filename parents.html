@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="bg">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>За родители | DesignRealm</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <a href="index.html"><img src="images/logo_notext.png" alt="DesignRealm Logo"><span>DesignRealm</span></a>
+        </div>
+        <nav id="nav">
+            <a href="index.html">Начало</a>
+            <a href="3dprint.html">3D принтирането</a>
+            <a href="catalog.html">Каталог</a>
+            <a href="blog.html" class="active">Блог</a>
+            <a href="about.html">За нас</a>
+            <a href="contact.html">Контакти</a>
+            <a href="parents.html">За родители</a>
+            <a id="login-link" href="login.html">Вход</a>
+            <a href="admin.html" id="admin-link" style="display:none;">Админ панел</a>
+        </nav>
+        <button id="menu-toggle">☰</button>
+        <div id="dashboard" class="dashboard" style="display:none;">
+            <button id="dashboard-btn"><span class="dash-avatar">👤</span></button>
+            <div id="dashboard-menu" class="dashboard-menu">
+                <p id="user-greeting">Здравей!</p>
+                <a href="favorites.html">❤️ Любими</a>
+                <a href="profile.html">⚙️ Профил</a>
+                <a href="upload.html">Качи модел</a>
+                <button id="logout-btn" class="btn-logout">🚪 Изход</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="parents-page">
+
+        <!-- HERO -->
+        <div class="parents-hero">
+            <span class="parents-badge">👨‍👩‍👧 Информация за родители</span>
+            <h1>Защо DesignRealm е <span>безопасен</span> за вашите деца?</h1>
+            <p>Разберете как нашата платформа помага на учениците да развият творчески и технически умения в сигурна
+                онлайн среда.</p>
+        </div>
+
+        <!-- BENEFITS -->
+        <div class="section-title">
+            <h2>✨ Ползи за вашето дете</h2>
+            <p>DesignRealm предлага редица образователни и творчески предимства</p>
+        </div>
+
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <span class="benefit-icon">🎨</span>
+                <h3>Развива творческото мислене</h3>
+                <p>Разглеждането и създаването на 3D модели стимулира въображението и пространственото мислене на
+                    децата.</p>
+            </div>
+            <div class="benefit-card">
+                <span class="benefit-icon">🔬</span>
+                <h3>Въвежда в STEM</h3>
+                <p>3D принтирането е в основата на инженерството и технологиите — умения, търсени в 21-ви век.</p>
+            </div>
+            <div class="benefit-card">
+                <span class="benefit-icon">🆓</span>
+                <h3>Напълно безплатно</h3>
+                <p>Платформата е безплатна за всички български ученици. Без скрити такси или абонаменти.</p>
+            </div>
+            <div class="benefit-card">
+                <span class="benefit-icon">🇧🇬</span>
+                <h3>На български език</h3>
+                <p>Целият сайт е на български — децата могат да учат без езикова бариера.</p>
+            </div>
+            <div class="benefit-card">
+                <span class="benefit-icon">👩‍🏫</span>
+                <h3>Подходящ за училище</h3>
+                <p>Моделите са насочени към образованието — подходящи за часове по технологии и проектно обучение.</p>
+            </div>
+            <div class="benefit-card">
+                <span class="benefit-icon">🤝</span>
+                <h3>Общност и споделяне</h3>
+                <p>Учениците могат да споделят свои модели, да получат обратна връзка и да се вдъхновяват взаимно.</p>
+            </div>
+        </div>
+
+        <!-- SAFETY -->
+        <div class="safety-card">
+            <h2>🛡️ Безопасност на платформата</h2>
+            <ul class="safety-list">
+                <li>
+                    <span>✅</span>
+                    <span><strong>Модерация на съдържанието</strong> — всеки качен модел минава през одобрение от
+                        администратор преди да стане публичен.</span>
+                </li>
+                <li>
+                    <span>✅</span>
+                    <span><strong>Без лични данни</strong> — не съхраняваме излишна лична информация. Нужни са само
+                        имейл и парола за регистрация.</span>
+                </li>
+                <li>
+                    <span>✅</span>
+                    <span><strong>Без реклами</strong> — платформата е напълно без реклами и без плащане.</span>
+                </li>
+                <li>
+                    <span>✅</span>
+                    <span><strong>Само образователно съдържание</strong> — каталогът съдържа единствено 3D модели
+                        подходящи за учебна употреба.</span>
+                </li>
+                <li>
+                    <span>✅</span>
+                    <span><strong>Firebase сигурност</strong> — акаунтите са защитени с Firebase Authentication — същата
+                        технология, използвана от Google.</span>
+                </li>
+                <li>
+                    <span>✅</span>
+                    <span><strong>Пълен контрол</strong> — вашето дете може да изтрие акаунта си по всяко време от
+                        страницата за сигурност.</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- FAQ -->
+        <div class="section-title">
+            <h2>❓ Често задавани въпроси</h2>
+        </div>
+        <div class="faq-list">
+            <div class="faq-item">
+                <h4>Трябва ли детето ми да има акаунт, за да разглежда моделите?</h4>
+                <p>Не — каталогът е публичен и всеки може да разглежда одобрените модели без регистрация. Акаунт е нужен
+                    само за качване на модели и запазване на любими.</p>
+            </div>
+            <div class="faq-item">
+                <h4>Кой проверява моделите, качени от учениците?</h4>
+                <p>Всеки качен модел се преглежда от администратор на платформата преди да стане видим. Модели с
+                    неподходящо съдържание се отхвърлят автоматично.</p>
+            </div>
+            <div class="faq-item">
+                <h4>Дали платформата е подходяща за всички възрасти?</h4>
+                <p>Да — DesignRealm е насочена предимно към ученици от 5-ти до 12-ти клас, но е подходяща за всеки,
+                    който се интересува от 3D принтиране.</p>
+            </div>
+            <div class="faq-item">
+                <h4>Как мога да се свържа с екипа при проблем?</h4>
+                <p>Можете да използвате контактната форма на страницата „Контакти" или да ни пишете директно на
+                    designverseinfos@gmail.com.</p>
+            </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="parents-cta">
+            <h2>🚀 Готови ли сте да започнете?</h2>
+            <p>Насърчете детето си да открие света на 3D дизайна — безплатно и безопасно.</p>
+            <div class="btns">
+                <a href="register.html" class="btn">Регистрирай се</a>
+                <a href="catalog.html" class="btn-outline-w">Разгледай каталога</a>
+                <a href="contact.html" class="btn-outline-w">Свържи се с нас</a>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>© 2025 DesignRealm. Всички права запазени.</p>
+    </footer>
+
+    <script type="module" src="firebase-init.js"></script>
+    <script type="module" src="auth.js"></script>
+    <script type="module" src="script.js"></script>
+    <script type="module" src="dashboard.js"></script>
+</body>
+
+</html>
