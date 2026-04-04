@@ -3,6 +3,7 @@ import {
     onAuthStateChanged,
     signOut,
     GoogleAuthProvider,
+    GitHubAuthProvider,
     signInWithPopup,
     signInWithRedirect
 } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
@@ -157,4 +158,33 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     });
+
+    const githubButtons = [
+        document.getElementById('github-signin'),
+        document.getElementById('github-register')
+    ].filter(Boolean);
+
+    const githubProvider = new GithubAuthProvider();
+
+    githubButtons.forEach(btn => {
+        btn.addEventListener('click', async (e) => {
+            e.preventDefault();
+            if (btn.disabled) return;
+            btn.disabled = true;
+            try {
+                await signInWithPopup(auth, githubProvider);
+                window.location.href = 'profile.html';
+            } catch (err) {
+                if (err.code === 'auth/popup-closed-by-user') {
+                    showToast('Затворихте прозореца. Опитайте отново.', 'error');
+                } else if (err.code === 'auth/account-exists-with-different-credential') {
+                    showToast('Вече имате акаунт с този имейл чрез друг доставчик.', 'error');
+                } else {
+                    showToast('Неуспешен вход с GitHub.', 'error');
+                }
+            } finally {
+                btn.disabled = false;
+            }
+        });
+    }); 
 });

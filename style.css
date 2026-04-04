@@ -6059,3 +6059,34 @@ parents-page {
     padding: 1.5rem;
   }
 }
+
+.github-btn {
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  width: 100%;
+
+  background: #24292e;
+  color: white;
+
+  padding: 10px;
+
+  border-radius: 10px;
+
+  font-weight: 600;
+
+  transition: 0.2s;
+
+}
+
+.github-btn:hover {
+  background: #2f363d;
+  transform: translateY(-2px);
+}
+
+.github-btn svg {
+  flex-shrink: 0;
+}
