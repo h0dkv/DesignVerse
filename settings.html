@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="bg">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
   <header>
     <div class="logo">
@@ -62,13 +64,18 @@
     </div>
   </div>
 
-  <footer><p>© 2025 DesignRealm. Всички права запазени.</p></footer>
+  <footer>
+    <p>© 2025 DesignRealm. Всички права запазени.</p>
+  </footer>
 
   <script type="module" src="firebase-init.js"></script>
   <script type="module" src="auth.js"></script>
   <script type="module" src="script.js"></script>
   <script type="module" src="dashboard.js"></script>
   <script type="module" src="check.js"></script>
+  <script type="module" src="profile.js"></script>
+  <script type="module" src="monitor.js"></script>
+  <script type="module" src="notifications.js"></script>
   <script type="module">
     import { auth, db } from './firebase-init.js';
     import { onAuthStateChanged, updateProfile } from 'https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js';
@@ -120,4 +127,5 @@
   </script>
   <script type="module" src="monitor.js"></script>
 </body>
+
 </html>

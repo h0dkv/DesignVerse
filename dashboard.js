@@ -1,8 +1,5 @@
 import { auth, db } from "./firebase-init.js";
-import {
-  onAuthStateChanged,
-  signOut
-} from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
+import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
 import { doc, getDoc } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -20,7 +17,6 @@ document.addEventListener("DOMContentLoaded", () => {
       if (dashboard) dashboard.style.display = "block";
       if (greeting) greeting.textContent = `Здравей, ${user.displayName || user.email.split("@")[0]}!`;
 
-      // Снимка от Google
       const btn = document.getElementById("dashboard-btn");
       if (btn && user.photoURL) {
         btn.innerHTML = `<img src="${user.photoURL}" style="width:38px;height:38px;border-radius:50%;object-fit:cover;">`;
@@ -32,10 +28,9 @@ document.addEventListener("DOMContentLoaded", () => {
           if (snap.exists() && userNameEl) {
             userNameEl.textContent = snap.data().username || user.displayName || user.email.split("@")[0];
           }
-        } catch (err) {
-          console.error("Failed to fetch user doc:", err);
-        }
+        } catch (err) { console.error("Failed to fetch user doc:", err); }
       })();
+
     } else {
       if (loginLink) loginLink.style.display = "inline-block";
       if (dashboard) dashboard.style.display = "none";
@@ -51,11 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (logoutBtn) {
     logoutBtn.addEventListener("click", async () => {
-      try {
-        await signOut(auth);
-      } catch (err) {
-        console.error("Sign out failed:", err);
-      }
+      try { await signOut(auth); } catch (err) { console.error(err); }
       window.location.href = "index.html";
     });
   }
