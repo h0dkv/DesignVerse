@@ -122,7 +122,7 @@ function filterAndRender() {
 
 /* ---------------- AUTH CHECK ---------------- */
 onAuthStateChanged(auth, async (user) => {
-  if (!user) { window.location.href = "login.html"; return; }
+  if (!user) { window.location.href = "auth.html"; return; }
 
   try {
     const snap = await getDoc(doc(db, "users", user.uid));

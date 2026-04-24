@@ -48,7 +48,7 @@ let currentUser = null;
 onAuthStateChanged(auth, (user) => {
   if (!user) {
     showToast("Моля първо влезте в профила си.", "error");
-    setTimeout(() => { window.location.href = "login.html"; }, 2000);
+    setTimeout(() => { window.location.href = "auth.html"; }, 2000);
     return;
   }
   currentUser = user;

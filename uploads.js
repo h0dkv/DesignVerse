@@ -67,7 +67,7 @@ function showEmpty() {
 }
 
 onAuthStateChanged(auth, async (user) => {
-    if (!user) { window.location.href = "login.html"; return; }
+    if (!user) { window.location.href = "auth.html"; return; }
 
     grid.innerHTML = "";
     try {

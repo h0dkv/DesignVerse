@@ -6,7 +6,275 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>За родители | DesignRealm</title>
     <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="pages.css">
+    <style>
+        .parents-page {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 1.5rem 5rem
+        }
+
+        .parents-hero {
+            text-align: center;
+            padding: 5rem 2rem 3.5rem;
+            position: relative
+        }
+
+        .parents-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 50% 0%, rgba(168, 102, 131, .18), transparent 60%);
+            pointer-events: none
+        }
+
+        .parents-hero>* {
+            position: relative;
+            z-index: 1
+        }
+
+        .parents-badge {
+            display: inline-block;
+            font-family: 'Syne', sans-serif;
+            font-size: .75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .1em;
+            color: #e8a8c4;
+            background: rgba(168, 102, 131, .15);
+            border: 1px solid rgba(168, 102, 131, .3);
+            padding: .35rem 1rem;
+            border-radius: 50px;
+            margin-bottom: 1.2rem
+        }
+
+        .parents-hero h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            font-weight: 800;
+            color: #fff;
+            margin: 0 0 1rem;
+            letter-spacing: -.02em;
+            line-height: 1.15
+        }
+
+        .parents-hero h1 span {
+            background: linear-gradient(135deg, #e8a8c4, #ffc145);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text
+        }
+
+        .parents-hero p {
+            color: rgba(255, 255, 255, .55);
+            font-size: 1.05rem;
+            max-width: 580px;
+            margin: 0 auto;
+            line-height: 1.75
+        }
+
+        .psec {
+            margin: 3.5rem 0 1.5rem
+        }
+
+        .psec .ey {
+            display: block;
+            font-family: 'Syne', sans-serif;
+            font-size: .72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .12em;
+            color: #a86683;
+            margin-bottom: .4rem
+        }
+
+        .psec h2 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #fff;
+            margin: 0
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1rem
+        }
+
+        .benefit-card {
+            background: rgba(255, 255, 255, .04);
+            border: 1px solid rgba(255, 255, 255, .08);
+            border-radius: 18px;
+            padding: 1.6rem 1.4rem;
+            transition: border-color .3s, transform .3s;
+            animation: pgFadeUp .5s ease-out both
+        }
+
+        .benefit-card:hover {
+            border-color: rgba(168, 102, 131, .3);
+            transform: translateY(-4px)
+        }
+
+        .benefit-icon {
+            display: block;
+            font-size: 1.8rem;
+            margin-bottom: .8rem
+        }
+
+        .benefit-card h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: .95rem;
+            font-weight: 700;
+            color: #fff;
+            margin: 0 0 .5rem
+        }
+
+        .benefit-card p {
+            font-size: .85rem;
+            color: rgba(255, 255, 255, .5);
+            line-height: 1.65;
+            margin: 0
+        }
+
+        .safety-card {
+            background: rgba(255, 255, 255, .04);
+            border: 1px solid rgba(255, 255, 255, .08);
+            border-radius: 20px;
+            padding: 2rem 2.2rem;
+            animation: pgFadeUp .5s ease-out .2s both
+        }
+
+        .safety-card h2 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #ffc145;
+            margin: 0 0 1.2rem
+        }
+
+        .safety-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0
+        }
+
+        .safety-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: .8rem;
+            font-size: .9rem;
+            color: rgba(255, 255, 255, .7);
+            line-height: 1.6;
+            padding: .8rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, .06)
+        }
+
+        .safety-list li:last-child {
+            border-bottom: none
+        }
+
+        .safety-list li span:first-child {
+            flex-shrink: 0;
+            color: #6fcf97
+        }
+
+        .safety-list strong {
+            color: rgba(255, 255, 255, .9)
+        }
+
+        .faq-list {
+            display: flex;
+            flex-direction: column;
+            gap: .8rem
+        }
+
+        .faq-item {
+            background: rgba(255, 255, 255, .03);
+            border: 1px solid rgba(255, 255, 255, .07);
+            border-radius: 16px;
+            padding: 1.3rem 1.5rem;
+            animation: pgFadeUp .5s ease-out both;
+            transition: border-color .25s
+        }
+
+        .faq-item:hover {
+            border-color: rgba(168, 102, 131, .25)
+        }
+
+        .faq-item h4 {
+            font-family: 'Syne', sans-serif;
+            font-size: .9rem;
+            font-weight: 700;
+            color: #fff;
+            margin: 0 0 .5rem
+        }
+
+        .faq-item p {
+            font-size: .85rem;
+            color: rgba(255, 255, 255, .55);
+            line-height: 1.65;
+            margin: 0
+        }
+
+        .parents-cta {
+            background: linear-gradient(135deg, rgba(168, 102, 131, .2), rgba(82, 29, 68, .3));
+            border: 1px solid rgba(168, 102, 131, .25);
+            border-radius: 22px;
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-top: 2rem
+        }
+
+        .parents-cta h2 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #fff;
+            margin: 0 0 .7rem
+        }
+
+        .parents-cta p {
+            color: rgba(255, 255, 255, .55);
+            margin: 0 0 1.8rem;
+            font-size: .95rem
+        }
+
+        .parents-cta .btns {
+            display: flex;
+            gap: .8rem;
+            justify-content: center;
+            flex-wrap: wrap
+        }
+
+        .btn-outline-w {
+            display: inline-block;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, .2);
+            color: rgba(255, 255, 255, .7);
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 500;
+            font-size: .9rem;
+            padding: .75rem 1.4rem;
+            border-radius: 12px;
+            text-decoration: none;
+            transition: all .25s
+        }
+
+        .btn-outline-w:hover {
+            background: rgba(255, 255, 255, .07);
+            border-color: rgba(255, 255, 255, .3);
+            color: #fff
+        }
+    </style>
 </head>
 
 <body>
@@ -22,7 +290,7 @@
             <a href="about.html">За нас</a>
             <a href="contact.html">Контакти</a>
             <a href="parents.html" class="active">За родители</a>
-            <a id="login-link" href="login.html">Вход</a>
+            <a id="login-link" href="auth.html">Вход</a>
             <a href="admin.html" id="admin-link" style="display:none;">Админ панел</a>
         </nav>
         <button id="menu-toggle">☰</button>
@@ -39,8 +307,6 @@
     </header>
 
     <div class="parents-page">
-
-        <!-- HERO -->
         <div class="parents-hero">
             <span class="parents-badge">👨‍👩‍👧 Информация за родители</span>
             <h1>Защо DesignRealm е <span>безопасен</span> за вашите деца?</h1>
@@ -48,126 +314,94 @@
                 онлайн среда.</p>
         </div>
 
-        <!-- BENEFITS -->
-        <div class="section-title">
-            <h2>✨ Ползи за вашето дете</h2>
-            <p>DesignRealm предлага редица образователни и творчески предимства</p>
+        <div class="psec"><span class="ey">Предимства</span>
+            <h2>Ползи за вашето дете</h2>
         </div>
-
         <div class="benefits-grid">
-            <div class="benefit-card">
-                <span class="benefit-icon">🎨</span>
+            <div class="benefit-card"><span class="benefit-icon">🎨</span>
                 <h3>Развива творческото мислене</h3>
-                <p>Разглеждането и създаването на 3D модели стимулира въображението и пространственото мислене на
-                    децата.</p>
+                <p>Разглеждането и създаването на 3D модели стимулира въображението и пространственото мислене.</p>
             </div>
-            <div class="benefit-card">
-                <span class="benefit-icon">🔬</span>
+            <div class="benefit-card"><span class="benefit-icon">🔬</span>
                 <h3>Въвежда в STEM</h3>
                 <p>3D принтирането е в основата на инженерството и технологиите — умения, търсени в 21-ви век.</p>
             </div>
-            <div class="benefit-card">
-                <span class="benefit-icon">🆓</span>
+            <div class="benefit-card"><span class="benefit-icon">🆓</span>
                 <h3>Напълно безплатно</h3>
                 <p>Платформата е безплатна за всички български ученици. Без скрити такси или абонаменти.</p>
             </div>
-            <div class="benefit-card">
-                <span class="benefit-icon">🇧🇬</span>
+            <div class="benefit-card"><span class="benefit-icon">🇧🇬</span>
                 <h3>На български език</h3>
                 <p>Целият сайт е на български — децата могат да учат без езикова бариера.</p>
             </div>
-            <div class="benefit-card">
-                <span class="benefit-icon">👩‍🏫</span>
+            <div class="benefit-card"><span class="benefit-icon">👩‍🏫</span>
                 <h3>Подходящ за училище</h3>
-                <p>Моделите са насочени към образованието — подходящи за часове по технологии и проектно обучение.</p>
+                <p>Моделите са насочени към образованието — подходящи за часове по технологии.</p>
             </div>
-            <div class="benefit-card">
-                <span class="benefit-icon">🤝</span>
+            <div class="benefit-card"><span class="benefit-icon">🤝</span>
                 <h3>Общност и споделяне</h3>
-                <p>Учениците могат да споделят свои модели, да получат обратна връзка и да се вдъхновяват взаимно.</p>
+                <p>Учениците могат да споделят свои модели и да се вдъхновяват взаимно.</p>
             </div>
         </div>
 
-        <!-- SAFETY -->
+        <div class="psec"><span class="ey">Сигурност</span>
+            <h2>Безопасност на платформата</h2>
+        </div>
         <div class="safety-card">
-            <h2>🛡️ Безопасност на платформата</h2>
+            <h2>🛡️ Какво правим за безопасността</h2>
             <ul class="safety-list">
-                <li>
-                    <span>✅</span>
-                    <span><strong>Модерация на съдържанието</strong> — всеки качен модел минава през одобрение от
-                        администратор преди да стане публичен.</span>
-                </li>
-                <li>
-                    <span>✅</span>
-                    <span><strong>Без лични данни</strong> — не съхраняваме излишна лична информация. Нужни са само
-                        имейл и парола за регистрация.</span>
-                </li>
-                <li>
-                    <span>✅</span>
-                    <span><strong>Без реклами</strong> — платформата е напълно без реклами и без плащане.</span>
-                </li>
-                <li>
-                    <span>✅</span>
-                    <span><strong>Само образователно съдържание</strong> — каталогът съдържа единствено 3D модели
-                        подходящи за учебна употреба.</span>
-                </li>
-                <li>
-                    <span>✅</span>
-                    <span><strong>Firebase сигурност</strong> — акаунтите са защитени с Firebase Authentication — същата
-                        технология, използвана от Google.</span>
-                </li>
-                <li>
-                    <span>✅</span>
-                    <span><strong>Пълен контрол</strong> — вашето дете може да изтрие акаунта си по всяко време от
-                        страницата за сигурност.</span>
-                </li>
+                <li><span>✅</span><span><strong>Модерация на съдържанието</strong> — всеки качен модел минава през
+                        одобрение от администратор преди да стане публичен.</span></li>
+                <li><span>✅</span><span><strong>Без лични данни</strong> — не съхраняваме излишна лична информация.
+                        Нужни са само имейл и парола.</span></li>
+                <li><span>✅</span><span><strong>Без реклами</strong> — платформата е напълно без реклами и без
+                        плащане.</span></li>
+                <li><span>✅</span><span><strong>Само образователно съдържание</strong> — каталогът съдържа единствено 3D
+                        модели подходящи за учебна употреба.</span></li>
+                <li><span>✅</span><span><strong>Firebase сигурност</strong> — акаунтите са защитени с Firebase
+                        Authentication — технология на Google.</span></li>
+                <li><span>✅</span><span><strong>Пълен контрол</strong> — вашето дете може да изтрие акаунта си по всяко
+                        време.</span></li>
             </ul>
         </div>
 
-        <!-- FAQ -->
-        <div class="section-title">
-            <h2>❓ Често задавани въпроси</h2>
+        <div class="psec"><span class="ey">FAQ</span>
+            <h2>Често задавани въпроси</h2>
         </div>
         <div class="faq-list">
             <div class="faq-item">
                 <h4>Трябва ли детето ми да има акаунт, за да разглежда моделите?</h4>
-                <p>Не — каталогът е публичен и всеки може да разглежда одобрените модели без регистрация. Акаунт е нужен
-                    само за качване на модели и запазване на любими.</p>
+                <p>Не — каталогът е публичен. Акаунт е нужен само за качване на модели и запазване на любими.</p>
             </div>
             <div class="faq-item">
                 <h4>Кой проверява моделите, качени от учениците?</h4>
-                <p>Всеки качен модел се преглежда от администратор на платформата преди да стане видим. Модели с
-                    неподходящо съдържание се отхвърлят автоматично.</p>
+                <p>Всеки качен модел се преглежда от администратор преди да стане видим. Модели с неподходящо съдържание
+                    се отхвърлят.</p>
             </div>
             <div class="faq-item">
                 <h4>Дали платформата е подходяща за всички възрасти?</h4>
-                <p>Да — DesignRealm е насочена предимно към ученици от 5-ти до 12-ти клас, но е подходяща за всеки,
-                    който се интересува от 3D принтиране.</p>
+                <p>Да — насочена е предимно към ученици от 5-ти до 12-ти клас, но е подходяща за всеки.</p>
             </div>
             <div class="faq-item">
                 <h4>Как мога да се свържа с екипа при проблем?</h4>
-                <p>Можете да използвате контактната форма на страницата „Контакти" или да ни пишете директно на
-                    designverseinfos@gmail.com.</p>
+                <p>Използвайте контактната форма или пишете на designverseinfos@gmail.com.</p>
             </div>
         </div>
 
-        <!-- CTA -->
         <div class="parents-cta">
             <h2>🚀 Готови ли сте да започнете?</h2>
             <p>Насърчете детето си да открие света на 3D дизайна — безплатно и безопасно.</p>
             <div class="btns">
-                <a href="register.html" class="btn">Регистрирай се</a>
+                <a href="auth.html?tab=register" class="btn">Регистрирай се</a>
                 <a href="catalog.html" class="btn-outline-w">Разгледай каталога</a>
                 <a href="contact.html" class="btn-outline-w">Свържи се с нас</a>
             </div>
         </div>
-
     </div>
 
     <footer>
         <p>© 2025 DesignRealm. Всички права запазени.</p>
     </footer>
-
     <script type="module" src="firebase-init.js"></script>
     <script type="module" src="auth.js"></script>
     <script type="module" src="script.js"></script>

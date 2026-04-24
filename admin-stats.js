@@ -22,7 +22,7 @@ function showToast(message, type = "success") {
 }
 
 onAuthStateChanged(auth, async (user) => {
-  if (!user) { window.location.href = "login.html"; return; }
+  if (!user) { window.location.href = "auth.html"; return; }
 
   try {
     const userSnap = await getDoc(doc(db, "users", user.uid));

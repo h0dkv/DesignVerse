@@ -4,148 +4,280 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Качвания | DesignRealm</title>
+  <title>Моите качвания | DesignRealm</title>
   <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="pages.css">
   <style>
     .uploads-page {
-      max-width: 900px;
-      margin: 2rem auto;
-      padding: 0 1.5rem;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 1.5rem 5rem
+    }
+
+    .uploads-hero {
+      text-align: center;
+      padding: 5rem 2rem 3rem;
+      position: relative
+    }
+
+    .uploads-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(168, 102, 131, .18), transparent 60%);
+      pointer-events: none
+    }
+
+    .uploads-hero>* {
+      position: relative;
+      z-index: 1
+    }
+
+    .up-badge2 {
+      display: inline-block;
+      font-family: 'Syne', sans-serif;
+      font-size: .75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: #e8a8c4;
+      background: rgba(168, 102, 131, .15);
+      border: 1px solid rgba(168, 102, 131, .3);
+      padding: .35rem 1rem;
+      border-radius: 50px;
+      margin-bottom: 1.2rem
+    }
+
+    .uploads-hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800;
+      color: #fff;
+      margin: 0 0 .7rem;
+      letter-spacing: -.02em
+    }
+
+    .uploads-hero h1 span {
+      background: linear-gradient(135deg, #e8a8c4, #ffc145);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text
+    }
+
+    .uploads-hero p {
+      color: rgba(255, 255, 255, .5);
+      font-size: .95rem;
+      margin: 0
+    }
+
+    .uploads-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+      gap: 1rem
+    }
+
+    .uploads-toolbar .small {
+      font-size: .82rem;
+      color: rgba(255, 255, 255, .4)
     }
 
     .uploads-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       gap: 1.2rem;
-      margin-top: 1.5rem;
+      margin-top: .5rem
     }
 
     .upload-item {
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04));
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, .04);
+      border: 1px solid rgba(255, 255, 255, .08);
       border-radius: 18px;
       padding: 1.3rem;
-      animation: fadeInUp 0.5s ease-out both;
+      animation: pgFadeUp .5s ease-out both;
+      transition: border-color .3s, transform .3s
+    }
+
+    .upload-item:hover {
+      border-color: rgba(168, 102, 131, .25);
+      transform: translateY(-3px)
+    }
+
+    .upload-item-thumb {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-bottom: .9rem;
+      background: rgba(255, 255, 255, .04)
     }
 
     .upload-item h4 {
-      margin: 0 0 0.4rem;
+      font-family: 'Syne', sans-serif;
+      margin: 0 0 .3rem;
       color: #fff;
-      font-size: 1rem;
+      font-size: .95rem;
+      font-weight: 700
     }
 
     .upload-item .meta {
-      font-size: 0.82rem;
-      color: rgba(255, 255, 255, 0.5);
-      margin-bottom: 1rem;
+      font-size: .8rem;
+      color: rgba(255, 255, 255, .4);
+      margin-bottom: .8rem
     }
 
-    .upload-item .status {
+    .status {
       display: inline-block;
-      padding: 0.2rem 0.7rem;
+      padding: .2rem .8rem;
       border-radius: 20px;
-      font-size: 0.78rem;
-      font-weight: 600;
-      margin-bottom: 1rem;
+      font-size: .75rem;
+      font-weight: 700;
+      margin-bottom: .9rem;
+      letter-spacing: .04em
     }
 
     .status-pending {
-      background: rgba(255, 193, 69, 0.2);
-      color: var(--accent);
-      border: 1px solid rgba(255, 193, 69, 0.3);
+      background: rgba(255, 193, 69, .12);
+      color: #ffc145;
+      border: 1px solid rgba(255, 193, 69, .25)
     }
 
     .status-approved {
-      background: rgba(40, 167, 69, 0.2);
+      background: rgba(111, 207, 151, .12);
       color: #6fcf97;
-      border: 1px solid rgba(40, 167, 69, 0.3);
+      border: 1px solid rgba(111, 207, 151, .25)
+    }
+
+    .status-rejected {
+      background: rgba(231, 76, 60, .12);
+      color: #ff9090;
+      border: 1px solid rgba(231, 76, 60, .25)
     }
 
     .upload-item-actions {
       display: flex;
-      gap: 0.6rem;
-      flex-wrap: wrap;
+      gap: .6rem;
+      flex-wrap: wrap
     }
 
     .btn-sm {
-      padding: 0.45rem 0.9rem;
-      font-size: 0.85rem;
+      padding: .45rem .9rem;
+      font-size: .82rem;
       border-radius: 10px;
       border: none;
       cursor: pointer;
       font-weight: 600;
       text-decoration: none;
       display: inline-block;
-      transition: all 0.2s ease;
+      transition: all .2s;
+      font-family: 'DM Sans', sans-serif
     }
 
     .btn-sm.danger {
-      background: rgba(180, 40, 60, 0.2);
+      background: rgba(180, 40, 60, .15);
       color: #ffb3b3;
-      border: 1px solid rgba(180, 40, 60, 0.3);
+      border: 1px solid rgba(180, 40, 60, .25)
     }
 
     .btn-sm.danger:hover {
-      background: rgba(180, 40, 60, 0.4);
+      background: rgba(180, 40, 60, .3)
     }
 
     .btn-sm.primary {
-      background: linear-gradient(135deg, var(--primary), var(--accent));
+      background: linear-gradient(135deg, #a86683, #ffc145);
       color: #fff;
+      box-shadow: 0 3px 12px rgba(168, 102, 131, .3)
+    }
+
+    .btn-sm.primary:hover {
+      filter: brightness(1.08);
+      transform: translateY(-1px)
     }
 
     .empty-state {
       text-align: center;
-      padding: 3rem;
-      color: rgba(255, 255, 255, 0.5);
+      padding: 4rem 2rem;
+      color: rgba(255, 255, 255, .4);
+      grid-column: 1/-1
     }
 
     .empty-state .icon {
       font-size: 3rem;
       margin-bottom: 1rem;
+      display: block
     }
 
-    /* Confirm Dialog */
+    .empty-state p {
+      font-size: .9rem;
+      margin: 0 0 1.5rem
+    }
+
+    /* confirm */
     .confirm-overlay {
-      display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.6);
-      z-index: 9998;
+      background: rgba(0, 0, 0, .65);
+      display: none;
       align-items: center;
       justify-content: center;
+      z-index: 9999;
+      backdrop-filter: blur(6px)
     }
 
     .confirm-overlay.show {
-      display: flex;
+      display: flex
     }
 
     .confirm-box {
-      background: rgba(82, 29, 68, 0.98);
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: #1a1228;
+      border: 1px solid rgba(255, 255, 255, .12);
       border-radius: 20px;
-      padding: 2rem;
-      max-width: 360px;
+      padding: 2.2rem;
+      max-width: 380px;
       width: 90%;
-      text-align: center;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+      text-align: center
     }
 
     .confirm-box h3 {
-      margin: 0 0 0.7rem;
+      font-family: 'Syne', sans-serif;
+      font-size: 1.1rem;
       color: #fff;
+      margin: 0 0 .6rem
     }
 
     .confirm-box p {
-      color: rgba(255, 255, 255, 0.7);
-      margin-bottom: 1.5rem;
+      color: rgba(255, 255, 255, .55);
+      font-size: .88rem;
+      margin: 0 0 1.5rem;
+      line-height: 1.6
     }
 
     .confirm-actions {
       display: flex;
-      gap: 0.8rem;
-      justify-content: center;
+      gap: .8rem;
+      justify-content: center
+    }
+
+    .up-back2 {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      font-size: .85rem;
+      color: rgba(255, 255, 255, .4);
+      text-decoration: none;
+      transition: color .2s;
+      margin-top: 1.5rem
+    }
+
+    .up-back2:hover {
+      color: #ffc145
     }
   </style>
 </head>
@@ -153,10 +285,7 @@
 <body>
   <header>
     <div class="logo">
-      <a href="index.html">
-        <img src="images/logo_notext.png" alt="DesignRealm Logo">
-        <span>DesignRealm</span>
-      </a>
+      <a href="index.html"><img src="images/logo_notext.png" alt="DesignRealm Logo"><span>DesignRealm</span></a>
     </div>
     <nav id="nav">
       <a href="index.html">Начало</a>
@@ -168,9 +297,7 @@
     </nav>
     <button id="menu-toggle">☰</button>
     <div id="dashboard" class="dashboard" style="display:none;">
-      <button id="dashboard-btn">
-        <span class="dash-avatar">👤</span>
-      </button>
+      <button id="dashboard-btn"><span class="dash-avatar">👤</span></button>
       <div id="dashboard-menu" class="dashboard-menu">
         <p id="user-greeting">Здравей!</p>
         <a href="favorites.html">❤️ Любими</a>
@@ -181,7 +308,6 @@
     </div>
   </header>
 
-  <!-- CONFIRM DIALOG -->
   <div class="confirm-overlay" id="confirm-overlay">
     <div class="confirm-box">
       <h3>🗑️ Изтриване</h3>
@@ -194,28 +320,25 @@
   </div>
 
   <div class="uploads-page">
-    <section class="hero">
-      <div class="hero-text">
-        <h1>📦 Вашите качвания</h1>
-        <p class="subtitle">Преглед и управление на вашите 3D модели.</p>
-      </div>
-    </section>
+    <div class="uploads-hero">
+      <span class="up-badge2">📦 Моето съдържание</span>
+      <h1>Моите <span>качвания</span></h1>
+      <p>Преглед и управление на твоите 3D модели в DesignRealm.</p>
+    </div>
 
-    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;">
+    <div class="uploads-toolbar">
       <span class="small" id="uploads-count">Зареждане...</span>
       <a href="upload.html" class="btn">⬆️ Качи нов модел</a>
     </div>
 
     <div class="uploads-grid" id="uploads-grid">
       <div class="empty-state">
-        <div class="icon">⏳</div>
+        <span class="icon">⏳</span>
         <p>Зареждане...</p>
       </div>
     </div>
 
-    <a href="profile.html" class="btn"
-      style="margin-top:1.5rem;display:inline-block;background:transparent;border:1px solid rgba(255,255,255,0.25);">←
-      Профил</a>
+    <a href="profile.html" class="up-back2">← Обратно към профила</a>
   </div>
 
   <footer>

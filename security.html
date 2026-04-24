@@ -6,7 +6,177 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Сигурност | DesignRealm</title>
   <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="pages.css">
+  <style>
+    .security-page {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 0 1.5rem 5rem
+    }
+
+    .security-hero {
+      text-align: center;
+      padding: 5rem 2rem 3rem;
+      position: relative
+    }
+
+    .security-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(168, 102, 131, .18), transparent 60%);
+      pointer-events: none
+    }
+
+    .security-hero>* {
+      position: relative;
+      z-index: 1
+    }
+
+    .sec-badge {
+      display: inline-block;
+      font-family: 'Syne', sans-serif;
+      font-size: .75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: #e8a8c4;
+      background: rgba(168, 102, 131, .15);
+      border: 1px solid rgba(168, 102, 131, .3);
+      padding: .35rem 1rem;
+      border-radius: 50px;
+      margin-bottom: 1.2rem
+    }
+
+    .security-hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800;
+      color: #fff;
+      margin: 0 0 .7rem;
+      letter-spacing: -.02em
+    }
+
+    .security-hero h1 span {
+      background: linear-gradient(135deg, #e8a8c4, #ffc145);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text
+    }
+
+    .security-hero p {
+      color: rgba(255, 255, 255, .5);
+      font-size: .95rem;
+      margin: 0
+    }
+
+    .sec-card {
+      background: rgba(255, 255, 255, .04);
+      border: 1px solid rgba(255, 255, 255, .08);
+      border-radius: 20px;
+      padding: 2rem 2.2rem;
+      margin-bottom: 1.2rem;
+      animation: pgFadeUp .5s ease-out both
+    }
+
+    .sec-card h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #ffc145;
+      margin: 0 0 1.2rem
+    }
+
+    .sec-card p {
+      color: rgba(255, 255, 255, .6);
+      font-size: .9rem;
+      line-height: 1.65;
+      margin: 0 0 1.2rem
+    }
+
+    .sec-field {
+      display: flex;
+      flex-direction: column;
+      gap: .35rem;
+      margin-bottom: 1rem
+    }
+
+    .sec-field label {
+      font-size: .78rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      color: rgba(255, 255, 255, .5)
+    }
+
+    .sec-field input {
+      background: rgba(255, 255, 255, .06);
+      border: 1px solid rgba(255, 255, 255, .12);
+      border-radius: 12px;
+      padding: .85rem 1rem;
+      color: #fff;
+      font-size: .92rem;
+      font-family: 'DM Sans', sans-serif;
+      outline: none;
+      transition: border-color .25s, box-shadow .25s
+    }
+
+    .sec-field input::placeholder {
+      color: rgba(255, 255, 255, .3)
+    }
+
+    .sec-field input:focus {
+      border-color: rgba(168, 102, 131, .55);
+      box-shadow: 0 0 0 3px rgba(168, 102, 131, .12)
+    }
+
+    .sec-submit {
+      width: 100%;
+      margin-top: .4rem
+    }
+
+    .btn-danger-soft {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      background: rgba(231, 76, 60, .12);
+      border: 1px solid rgba(231, 76, 60, .3);
+      color: #ff9090;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 600;
+      font-size: .9rem;
+      padding: .8rem 1.4rem;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all .25s
+    }
+
+    .btn-danger-soft:hover {
+      background: rgba(231, 76, 60, .22);
+      border-color: rgba(231, 76, 60, .5);
+      transform: translateY(-1px)
+    }
+
+    .sec-back {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      font-size: .85rem;
+      color: rgba(255, 255, 255, .4);
+      text-decoration: none;
+      transition: color .2s;
+      margin-top: .5rem
+    }
+
+    .sec-back:hover {
+      color: #ffc145
+    }
+  </style>
 </head>
 
 <body>
@@ -19,7 +189,7 @@
       <a href="catalog.html">Каталог</a>
       <a href="profile.html" class="active">Профил</a>
       <a href="favorites.html">Любими</a>
-      <a id="login-link" href="login.html">Вход</a>
+      <a id="login-link" href="auth.html">Вход</a>
       <a href="admin.html" id="admin-link" style="display:none;">Админ панел</a>
     </nav>
     <button id="menu-toggle">☰</button>
@@ -51,22 +221,20 @@
         </div>
         <div class="sec-field">
           <label>Нова парола</label>
-          <input type="password" id="new-password" placeholder="Въведи нова парола">
+          <input type="password" id="new-password" placeholder="Въведи нова парола (мин. 6 символа)">
         </div>
-        <button type="submit" class="btn" style="width:100%;margin-top:0.5rem;">Промени парола</button>
+        <button type="submit" class="btn sec-submit">Промени паролата</button>
       </form>
     </div>
 
-    <div class="sec-card">
-      <h3>⚠️ Изтриване на акаунт</h3>
-      <p style="color:rgba(255,255,255,0.65);font-size:0.95rem;margin-bottom:1.2rem;line-height:1.6;">
-        Изтриването на акаунта е необратимо. Всички ваши модели и данни ще бъдат премахнати завинаги.
-      </p>
+    <div class="sec-card" style="border-color:rgba(231,76,60,.2);">
+      <h3 style="color:#ff9090;">⚠️ Изтриване на акаунт</h3>
+      <p>Изтриването на акаунта е <strong style="color:rgba(255,255,255,.8);">необратимо</strong>. Всички ваши модели и
+        данни ще бъдат премахнати завинаги.</p>
       <button id="delete-account-btn" class="btn-danger-soft">🗑️ Изтрий акаунт</button>
     </div>
 
-    <a href="profile.html" class="btn" style="background:transparent;border:1px solid rgba(255,255,255,0.25);">← Обратно
-      към профила</a>
+    <a href="profile.html" class="sec-back">← Обратно към профила</a>
   </div>
 
   <footer>
@@ -79,7 +247,6 @@
   <script type="module" src="dashboard.js"></script>
   <script type="module" src="check.js"></script>
   <script type="module" src="profile.js"></script>
-  <script type="module" src="monitor.js"></script>
   <script type="module" src="notifications.js"></script>
   <script type="module">
     import { auth, db } from './firebase-init.js';
@@ -97,22 +264,20 @@
       setTimeout(() => { toast.classList.remove("dr-toast--show"); setTimeout(() => toast.remove(), 400); }, 3500);
     }
 
-    onAuthStateChanged(auth, (user) => { if (!user) window.location.href = 'login.html'; });
+    onAuthStateChanged(auth, (user) => { if (!user) window.location.href = 'auth.html'; });
 
     document.getElementById('change-password-form').addEventListener('submit', async (e) => {
       e.preventDefault();
       const current = document.getElementById('current-password').value;
       const next = document.getElementById('new-password').value;
-      if (!current || !next) return showToast('Попълнете полетата.', 'error');
+      if (!current || !next) return showToast('Попълнете и двете полета.', 'error');
       const user = auth.currentUser;
       try {
         await reauthenticateWithCredential(user, EmailAuthProvider.credential(user.email, current));
         await updatePassword(user, next);
         showToast('Паролата е успешно променена!');
         e.target.reset();
-      } catch (err) {
-        showToast('Грешна текуща парола.', 'error');
-      }
+      } catch (err) { showToast('Грешна текуща парола.', 'error'); }
     });
 
     document.getElementById('delete-account-btn').addEventListener('click', async () => {

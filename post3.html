@@ -1,14 +1,89 @@
 <!DOCTYPE html>
 <html lang="bg">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Новите 3D принтери в училище | DesignRealm</title>
   <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="pages.css">
+  <style>
+    .post-page {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem 5rem;
+    }
+    .post-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.4);
+      text-decoration: none;
+      margin-bottom: 2.5rem;
+      transition: color 0.2s;
+    }
+    .post-back:hover { color: #ffc145; }
+    .post-tag {
+      display: inline-block;
+      font-family: 'Syne', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #a86683;
+      background: rgba(168,102,131,0.12);
+      border: 1px solid rgba(168,102,131,0.25);
+      padding: 0.3rem 0.9rem;
+      border-radius: 50px;
+      margin-bottom: 1.2rem;
+    }
+    .post-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 800;
+      color: #fff;
+      margin: 0 0 0.6rem;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+    }
+    .post-date {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 2rem;
+    }
+    .post-hero-img {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      border-radius: 18px;
+      margin-bottom: 2.5rem;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .post-content p {
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.72);
+      line-height: 1.85;
+      margin: 0 0 1.4rem;
+    }
+    .post-footer {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .post-share {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.35);
+    }
+  </style>
 </head>
-
 <body>
   <header>
     <div class="logo">
@@ -25,18 +100,12 @@
       <a href="about.html">За нас</a>
       <a href="contact.html">Контакти</a>
       <a href="parents.html">За родители</a>
-      <a id="login-link" href="login.html">Вход</a>
+      <a id="login-link" href="auth.html">Вход</a>
       <a href="admin.html" id="admin-link" style="display:none;">Админ панел</a>
     </nav>
-
-
     <button id="menu-toggle">☰</button>
-
     <div id="dashboard" class="dashboard" style="display:none;">
-      <button id="dashboard-btn">
-        <span class="dash-avatar">👤</span>
-      </button>
-
+      <button id="dashboard-btn"><span class="dash-avatar">👤</span></button>
       <div id="dashboard-menu" class="dashboard-menu">
         <p id="user-greeting">Здравей!</p>
         <a href="favorites.html">❤️ Любими</a>
@@ -45,38 +114,34 @@
         <button id="logout-btn" class="btn-logout">🚪 Изход</button>
       </div>
     </div>
-
   </header>
 
-
-
-
-  <main class="blog-post">
-    <h1>Новите 3D принтери в училище</h1>
-    <img src="images/3dprinters.jpg" alt="3D принтери">
-    <p><strong>Дата:</strong> 12 ноември 2025</p>
-    <p>
-      В училището вече имаме чисто нови 3D принтери! 🖨️
-      Те ни позволяват да работим с по-големи модели, по-точни детайли и различни видове филаменти.
-      <br><br>
-      Сега можем да изработваме проекти за роботика, архитектура и дори декоративни предмети.
-      Учениците ще имат възможност да участват в работилници и състезания, където ще
-      представят своите собствени идеи.
-      <br><br>
-      Благодарим на всички, които помогнаха това да стане реалност! 🚀
-    </p>
-    <a href="blog.html" class="btn">← Назад към блога</a>
-  </main>
+  <article class="post-page">
+    <a href="blog.html" class="post-back">← Обратно към блога</a>
+    <span class="post-tag">Блог</span>
+    <h1 class="post-title">Новите 3D принтери в училище 🖨️</h1>
+    <p class="post-date">📅 12 ноември 2025</p>
+    <img src="images/3dprinters.jpg" alt="Новите 3D принтери в училище 🖨️" class="post-hero-img" onerror="this.src='images/logo_notext.png'">
+    <div class="post-content">
+      <p>В училището вече имаме чисто нови 3D принтери! Те ни позволяват да работим с по-големи модели, по-точни детайли и различни видове филаменти.</p>
+      <p>Сега можем да изработваме проекти за роботика, архитектура и дори декоративни предмети. Учениците ще имат възможност да участват в работилници и състезания.</p>
+      <p>Благодарим на всички, които помогнаха това да стане реалност! Очаквайте скоро снимки от първите ни принтове! 🚀</p>
+    </div>
+    <div class="post-footer">
+      <a href="blog.html" class="btn">← Всички публикации</a>
+      <span class="post-share">DesignRealm © 2025</span>
+    </div>
+  </article>
 
   <footer>
     <p>© 2025 DesignRealm. Всички права запазени.</p>
-    <script type="module" src="script.js"></script>
-    <script type="module" src="dashboard.js"></script>
-    <script type="module" src="firebase-init.js"></script>
-    <script type="module" src="auth.js"></script>
-    <script type="module" src="check.js"></script>
-    <script type="module" src="notifications.js"></script>
   </footer>
-</body>
 
+  <script type="module" src="firebase-init.js"></script>
+  <script type="module" src="auth.js"></script>
+  <script type="module" src="script.js"></script>
+  <script type="module" src="dashboard.js"></script>
+  <script type="module" src="check.js"></script>
+  <script type="module" src="notifications.js"></script>
+</body>
 </html>

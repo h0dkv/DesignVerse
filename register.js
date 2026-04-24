@@ -47,7 +47,7 @@ if (form) {
       });
 
       alert("Успешна регистрация!");
-      window.location.href = "login.html";
+      window.location.href = "auth.html";
 
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {

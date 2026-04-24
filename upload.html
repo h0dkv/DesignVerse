@@ -6,16 +6,243 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Качи модел | DesignRealm</title>
   <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="pages.css">
+  <style>
+    .upload-page {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 1.5rem 5rem
+    }
+
+    .upload-hero {
+      text-align: center;
+      padding: 5rem 2rem 3rem;
+      position: relative
+    }
+
+    .upload-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(168, 102, 131, .18), transparent 60%);
+      pointer-events: none
+    }
+
+    .upload-hero>* {
+      position: relative;
+      z-index: 1
+    }
+
+    .up-badge {
+      display: inline-block;
+      font-family: 'Syne', sans-serif;
+      font-size: .75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: #e8a8c4;
+      background: rgba(168, 102, 131, .15);
+      border: 1px solid rgba(168, 102, 131, .3);
+      padding: .35rem 1rem;
+      border-radius: 50px;
+      margin-bottom: 1.2rem
+    }
+
+    .upload-hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800;
+      color: #fff;
+      margin: 0 0 .7rem;
+      letter-spacing: -.02em
+    }
+
+    .upload-hero h1 span {
+      background: linear-gradient(135deg, #e8a8c4, #ffc145);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text
+    }
+
+    .upload-hero p {
+      color: rgba(255, 255, 255, .5);
+      font-size: .95rem;
+      margin: 0
+    }
+
+    .upload-card {
+      background: rgba(255, 255, 255, .04);
+      border: 1px solid rgba(255, 255, 255, .08);
+      border-radius: 20px;
+      padding: 2rem 2.2rem;
+      margin-bottom: 1.2rem;
+      animation: pgFadeUp .5s ease-out both
+    }
+
+    .upload-card h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #ffc145;
+      margin: 0 0 .4rem
+    }
+
+    .upload-card>p {
+      font-size: .82rem;
+      color: rgba(255, 255, 255, .35);
+      margin: 0 0 1.5rem
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: .4rem;
+      margin-bottom: 1.2rem
+    }
+
+    .form-group label {
+      font-size: .78rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      color: rgba(255, 255, 255, .5)
+    }
+
+    .form-group input,
+    .form-group textarea {
+      background: rgba(255, 255, 255, .06);
+      border: 1px solid rgba(255, 255, 255, .12);
+      border-radius: 12px;
+      padding: .85rem 1rem;
+      color: #fff;
+      font-size: .92rem;
+      font-family: 'DM Sans', sans-serif;
+      outline: none;
+      resize: vertical;
+      transition: border-color .25s, box-shadow .25s
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: rgba(255, 255, 255, .3)
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: rgba(168, 102, 131, .55);
+      box-shadow: 0 0 0 3px rgba(168, 102, 131, .12)
+    }
+
+    .drop-zone {
+      background: rgba(255, 255, 255, .03);
+      border: 2px dashed rgba(255, 255, 255, .15);
+      border-radius: 14px;
+      padding: 2rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all .25s
+    }
+
+    .drop-zone:hover,
+    .drop-zone.dragover {
+      border-color: rgba(168, 102, 131, .5);
+      background: rgba(168, 102, 131, .06)
+    }
+
+    .drop-zone-content .icon {
+      font-size: 2rem;
+      margin-bottom: .6rem
+    }
+
+    .drop-zone-content p {
+      color: rgba(255, 255, 255, .45);
+      font-size: .88rem;
+      margin: 0
+    }
+
+    .click-here {
+      color: #ffc145;
+      text-decoration: underline;
+      cursor: pointer
+    }
+
+    .file-info {
+      margin-top: .8rem;
+      background: rgba(255, 255, 255, .05);
+      border: 1px solid rgba(255, 255, 255, .08);
+      border-radius: 10px;
+      padding: .7rem 1rem;
+      font-size: .85rem;
+      color: rgba(255, 255, 255, .7)
+    }
+
+    .progress-container {
+      margin-top: 1rem
+    }
+
+    .progress-bar {
+      background: rgba(255, 255, 255, .08);
+      border-radius: 50px;
+      height: 8px;
+      overflow: hidden;
+      margin-bottom: .5rem
+    }
+
+    .progress-fill {
+      background: linear-gradient(90deg, #a86683, #ffc145);
+      height: 100%;
+      border-radius: 50px;
+      transition: width .3s ease;
+      width: 0
+    }
+
+    .progress-container p {
+      font-size: .82rem;
+      color: rgba(255, 255, 255, .5);
+      margin: 0
+    }
+
+    .upload-btn {
+      width: 100%;
+      margin-top: 1rem;
+      font-size: 1rem;
+      padding: 1rem
+    }
+
+    .upload-btn:disabled {
+      opacity: .4;
+      cursor: not-allowed;
+      transform: none !important;
+      box-shadow: none !important;
+      filter: none !important
+    }
+
+    .up-back {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      font-size: .85rem;
+      color: rgba(255, 255, 255, .4);
+      text-decoration: none;
+      transition: color .2s;
+      margin-top: .5rem
+    }
+
+    .up-back:hover {
+      color: #ffc145
+    }
+  </style>
 </head>
 
 <body>
   <header>
     <div class="logo">
-      <a href="index.html">
-        <img src="images/logo_notext.png" alt="DesignRealm logo">
-        <span>DesignRealm</span>
-      </a>
+      <a href="index.html"><img src="images/logo_notext.png" alt="DesignRealm Logo"><span>DesignRealm</span></a>
     </div>
     <nav id="nav">
       <a href="index.html">Начало</a>
@@ -38,46 +265,43 @@
     </div>
   </header>
 
-  <main style="max-width:800px;margin:1.5rem auto;">
-    <section class="hero">
-      <div class="hero-text">
-        <h1>⬆ Качи 3D модел</h1>
-        <p class="subtitle">Качи своя STL или ZIP файл и го сподели с общността.</p>
-      </div>
-    </section>
+  <div class="upload-page">
+    <div class="upload-hero">
+      <span class="up-badge">📤 Качи файл</span>
+      <h1>Сподели своя <span>3D модел</span></h1>
+      <p>Качи STL или ZIP файл и го сподели с общността на DesignRealm.</p>
+    </div>
 
     <div class="upload-card">
-      <h2>📤 Качи модел</h2>
-      <p>Поддържани формати: <strong>STL, ZIP</strong> (макс. 50MB)</p>
+      <h2>📤 Нов модел</h2>
+      <p>Поддържани формати: <strong style="color:rgba(255,255,255,.7)">STL, ZIP</strong> — максимум 50MB</p>
 
       <div class="form-group">
-        <label for="title">Име на модела</label>
-        <input id="title" type="text" placeholder="Например: Phone Stand" required>
+        <label>Име на модела</label>
+        <input id="title" type="text" placeholder="Например: Phone Stand">
       </div>
 
       <div class="form-group">
-        <label for="description">Описание</label>
+        <label>Описание</label>
         <textarea id="description" rows="3" placeholder="Кратко описание на модела..."></textarea>
       </div>
 
-      <!-- СНИМКА -->
       <div class="form-group">
         <label>Снимка на модела <span
-            style="color:rgba(255,255,255,0.45);font-weight:400;">(препоръчително)</span></label>
-        <div id="image-drop-zone" class="drop-zone" style="min-height:120px;">
+            style="color:rgba(255,255,255,.3);font-weight:400;">(препоръчително)</span></label>
+        <div id="image-drop-zone" class="drop-zone" style="min-height:110px;">
           <div class="drop-zone-content">
             <div class="icon">🖼️</div>
             <p>Пусни снимка тук или <span class="click-here">кликни за избор</span></p>
             <input id="image-file" type="file" accept="image/*" hidden>
           </div>
         </div>
-        <div id="image-preview-wrap" style="display:none;margin-top:0.8rem;text-align:center;">
+        <div id="image-preview-wrap" style="display:none;margin-top:.8rem;text-align:center;">
           <img id="image-preview" src="" alt="Преглед"
             style="max-height:180px;border-radius:12px;object-fit:cover;max-width:100%;">
         </div>
       </div>
 
-      <!-- ФАЙЛ -->
       <div class="form-group">
         <label>Файл за качване</label>
         <div id="drop-zone" class="drop-zone">
@@ -88,7 +312,7 @@
           </div>
         </div>
         <div id="file-info" class="file-info" style="display:none;">
-          <strong id="file-name"></strong> (<span id="file-size"></span>)
+          <strong id="file-name"></strong> — <span id="file-size"></span>
         </div>
       </div>
 
@@ -99,11 +323,11 @@
         <p id="progress-text">Качване... 0%</p>
       </div>
 
-      <button id="uploadBtn" class="btn upload-btn" disabled>⬆ Качи модел</button>
+      <button id="uploadBtn" class="btn upload-btn" disabled>⬆ Качи модела</button>
     </div>
 
-    <a href="index.html" class="btn" style="margin-top:1rem;display:inline-block">← Начало</a>
-  </main>
+    <a href="index.html" class="up-back">← Обратно към началото</a>
+  </div>
 
   <footer>
     <p>© 2025 DesignRealm. Всички права запазени.</p>

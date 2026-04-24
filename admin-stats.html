@@ -4,20 +4,180 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Админ Статистики | DesignRealm</title>
+  <title>Статистики | DesignRealm</title>
   <link rel="icon" href="favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&display=swap"
+    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="pages.css">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    .admin-stats-page {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem 5rem
+    }
+
+    .stats-hero {
+      text-align: center;
+      padding: 4rem 2rem 3rem;
+      position: relative
+    }
+
+    .stats-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(255, 193, 69, .1), transparent 60%);
+      pointer-events: none
+    }
+
+    .stats-hero>* {
+      position: relative;
+      z-index: 1
+    }
+
+    .stats-badge {
+      display: inline-block;
+      font-family: 'Syne', sans-serif;
+      font-size: .75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: #ffc145;
+      background: rgba(255, 193, 69, .1);
+      border: 1px solid rgba(255, 193, 69, .25);
+      padding: .35rem 1rem;
+      border-radius: 50px;
+      margin-bottom: 1.2rem
+    }
+
+    .stats-hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800;
+      color: #fff;
+      margin: 0 0 .6rem;
+      letter-spacing: -.02em
+    }
+
+    .stats-hero p {
+      color: rgba(255, 255, 255, .5);
+      font-size: .95rem;
+      margin: 0
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.2rem;
+      margin-top: 2.5rem
+    }
+
+    .stat-card {
+      background: rgba(255, 255, 255, .04);
+      border: 1px solid rgba(255, 255, 255, .08);
+      border-radius: 22px;
+      padding: 2.2rem 1.5rem;
+      text-align: center;
+      animation: pgFadeUp .5s ease-out both;
+      transition: border-color .3s, transform .3s
+    }
+
+    .stat-card:hover {
+      border-color: rgba(255, 193, 69, .3);
+      transform: translateY(-4px)
+    }
+
+    .stat-card:nth-child(1) {
+      animation-delay: .05s
+    }
+
+    .stat-card:nth-child(2) {
+      animation-delay: .1s
+    }
+
+    .stat-card:nth-child(3) {
+      animation-delay: .15s
+    }
+
+    .stat-card .material-icons {
+      font-size: 2rem;
+      color: #ffc145;
+      margin-bottom: .8rem;
+      display: block
+    }
+
+    .stat-card h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #fff;
+      margin: 0 0 .4rem;
+      line-height: 1
+    }
+
+    .stat-card h2 a {
+      color: #ffc145;
+      text-decoration: none
+    }
+
+    .stat-card p {
+      font-size: .82rem;
+      color: rgba(255, 255, 255, .4);
+      margin: 0;
+      text-transform: uppercase;
+      letter-spacing: .06em
+    }
+
+    .stat-divider {
+      color: rgba(255, 255, 255, .25);
+      font-size: 1.5rem;
+      font-weight: 300;
+      margin: 0 .2rem
+    }
+
+    .admin-quick-nav {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+      margin-top: 2rem
+    }
+
+    .admin-quick-link {
+      display: flex;
+      align-items: center;
+      gap: .8rem;
+      background: rgba(255, 255, 255, .04);
+      border: 1px solid rgba(255, 255, 255, .08);
+      border-radius: 14px;
+      padding: 1rem 1.2rem;
+      text-decoration: none;
+      color: rgba(255, 255, 255, .7);
+      font-size: .88rem;
+      font-weight: 500;
+      transition: all .25s
+    }
+
+    .admin-quick-link:hover {
+      border-color: rgba(255, 193, 69, .3);
+      color: #ffc145;
+      background: rgba(255, 193, 69, .05);
+      transform: translateY(-2px)
+    }
+
+    .admin-quick-link span {
+      font-size: 1.2rem
+    }
+  </style>
 </head>
 
 <body>
   <header>
     <div class="logo">
-      <a href="index.html">
-        <img src="images/logo_notext.png" alt="DesignRealm">
-        <span>DesignRealm</span>
-      </a>
+      <a href="index.html"><img src="images/logo_notext.png" alt="DesignRealm"><span>DesignRealm</span></a>
     </div>
     <nav id="nav">
       <a href="admin.html">Админ панел</a>
@@ -40,40 +200,51 @@
     </div>
   </header>
 
-  <main class="admin-stats-page">
-    <h1>📊 Статистика на платформата</h1>
-    <p class="subtitle">Обща информация за потребители, роли и съдържание</p>
+  <div class="admin-stats-page">
+    <div class="stats-hero">
+      <span class="stats-badge">📊 Административна зона</span>
+      <h1>Статистика на платформата</h1>
+      <p>Обща информация за потребители, роли и съдържание</p>
+    </div>
 
-    <section class="stats-grid">
+    <div class="stats-grid">
       <div class="stat-card">
         <span class="material-icons">group</span>
         <h2 id="total-users">—</h2>
         <p>Общо потребители</p>
       </div>
-
       <div class="stat-card">
         <span class="material-icons">view_in_ar</span>
         <h2>
-          <span id="approved-models">—</span> /
-          <a href="pending-models.html" id="pending-link" style="color:var(--accent)">
-            <span id="pending-models">—</span>
-          </a>
+          <span id="approved-models">—</span>
+          <span class="stat-divider">/</span>
+          <a href="pending-models.html"><span id="pending-models">—</span></a>
         </h2>
-        <p>3D модели (Одобрени / Чакащи)</p>
+        <p>Модели (Одобрени / Чакащи)</p>
       </div>
-
       <div class="stat-card">
         <span class="material-icons">favorite</span>
         <h2 id="favorites-count">—</h2>
-        <p>Любими модели</p>
+        <p>Запазени любими</p>
       </div>
-    </section>
-  </main>
+    </div>
+
+    <div style="margin-top:2.5rem">
+      <p
+        style="font-family:'Syne',sans-serif;font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#a86683;margin:0 0 1rem;">
+        Бърза навигация</p>
+      <div class="admin-quick-nav">
+        <a href="manage-users.html" class="admin-quick-link"><span>👥</span> Потребители</a>
+        <a href="pending-models.html" class="admin-quick-link"><span>✅</span> Одобряване</a>
+        <a href="upload.html" class="admin-quick-link"><span>⬆️</span> Качи модел</a>
+        <a href="admin.html" class="admin-quick-link"><span>🔐</span> Админ панел</a>
+      </div>
+    </div>
+  </div>
 
   <footer>
     <p>© 2025 DesignRealm. Всички права запазени.</p>
   </footer>
-
   <script type="module" src="firebase-init.js"></script>
   <script type="module" src="auth.js"></script>
   <script type="module" src="script.js"></script>

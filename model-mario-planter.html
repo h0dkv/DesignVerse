@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mario плантатор | DesignRealm</title>
     <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="pages.css">
 </head>
@@ -14,7 +18,7 @@
     <header>
         <div class="logo">
             <a href="index.html">
-                <img src="images/logo_notext.png" alt="DesignRealm Logo" class="logo-img">
+                <img src="images/logo_notext.png" alt="DesignRealm Logo">
                 <span>DesignRealm</span>
             </a>
         </div>
@@ -26,9 +30,20 @@
             <a href="about.html">За нас</a>
             <a href="contact.html">Контакти</a>
             <a href="parents.html">За родители</a>
-            <a id="login-link" href="login.html">Вход</a>
+            <a id="login-link" href="auth.html">Вход</a>
             <a href="admin.html" id="admin-link" style="display:none;">Админ панел</a>
         </nav>
+        <button id="menu-toggle">☰</button>
+        <div id="dashboard" class="dashboard" style="display:none;">
+            <button id="dashboard-btn"><span class="dash-avatar">👤</span></button>
+            <div id="dashboard-menu" class="dashboard-menu">
+                <p id="user-greeting">Здравей!</p>
+                <a href="favorites.html">❤️ Любими</a>
+                <a href="profile.html">⚙️ Профил</a>
+                <a href="upload.html">Качи модел</a>
+                <button id="logout-btn" class="btn-logout">🚪 Изход</button>
+            </div>
+        </div>
     </header>
 
     <main class="model-page">
@@ -39,18 +54,20 @@
             </div>
             <div class="model-details">
                 <h1>Mario плантатор</h1>
-                <p class="model-description">
-                    Забавен модел за любители на Mario, подходящ за малки растения и декоративна употреба.
-                </p>
+                <p class="model-description">Забавен модел за любители на Mario, подходящ за малки растения и
+                    декоративна употреба.</p>
                 <div class="model-meta">
-                    <div><strong>Формат:</strong> ZIP</div>
-                    <div><strong>Категория:</strong> Декорация</div>
-                    <div><strong>Ниво на печат:</strong> Средно</div>
+                    <div><strong>Формат:</strong> <span>ZIP</span></div>
+                    <div><strong>Категория:</strong> <span>Декорация</span></div>
+                    <div><strong>Ниво на печат:</strong> <span>Средно</span></div>
                 </div>
                 <div class="model-actions">
                     <a href="files/Mario_planter.zip" download class="btn">⬇ Изтегли ZIP</a>
-                    <button class="fav-btn">❤️ Добави в любими</button>
+                    <button class="fav-btn" data-model="model-mario-planter" data-name="Mario плантатор"
+                        data-img="images/marioplanter.jpg">❤️ Добави в любими</button>
                 </div>
+                <div id="fav-msg" style="display:none;margin-top:0.8rem;font-size:0.85rem;color:#6fcf97;">✓ Запазено в
+                    любими!</div>
             </div>
         </section>
     </main>
@@ -58,9 +75,10 @@
     <footer>
         <p>© 2025 DesignRealm. Всички права запазени.</p>
     </footer>
-    <script type="module" src="script.js"></script>
+
     <script type="module" src="firebase-init.js"></script>
     <script type="module" src="auth.js"></script>
+    <script type="module" src="script.js"></script>
     <script type="module" src="dashboard.js"></script>
     <script type="module" src="check.js"></script>
     <script type="module" src="notifications.js"></script>

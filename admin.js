@@ -6,7 +6,7 @@ import { doc, getDoc } from
 
 onAuthStateChanged(auth, async (user) => {
   if (!user) {
-    window.location.href = "login.html";
+    window.location.href = "auth.html";
     return;
   }
 

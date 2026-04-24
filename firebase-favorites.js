@@ -95,7 +95,7 @@ onAuthStateChanged(auth, async (user) => {
   if (!favListEl) return;
 
   if (!user) {
-    favListEl.innerHTML = `<p style="color:rgba(255,255,255,0.6)">Трябва да сте <a href="login.html" style="color:var(--accent)">логнати</a>, за да виждате любимите модели.</p>`;
+    favListEl.innerHTML = `<p style="color:rgba(255,255,255,0.6)">Трябва да сте <a href="auth.html" style="color:var(--accent)">логнати</a>, за да виждате любимите модели.</p>`;
     if (clearBtn) clearBtn.style.display = "none";
     if (countEl) countEl.textContent = "";
     return;
