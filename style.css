@@ -2326,31 +2326,26 @@ nav a::after {
 }
 
 .dashboard-menu {
-  position: absolute;
-  right: 0;
-  top: 120%;
-  background: var(--crimson-violet) !important;
-  border: 1px solid #333;
-  border-radius: 10px;
-  padding: 10px;
-  width: 180px;
-  display: none;
-  flex-direction: column;
-  gap: 8px;
-  z-index: 1000;
-  min-width: 180px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  background: #1a1228 !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 16px !important;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5) !important;
+  padding: 1rem !important;
 }
 
-.dashboard-menu a,
-.dashboard-menu button {
-  padding: 10px 15px;
-  text-align: left;
-  font-size: 14px;
-  color: white;
-  border: none;
-  background: none;
-  cursor: pointer;
+.dashboard-menu p {
+  color: rgba(255, 255, 255, 0.6) !important;
+  font-size: 0.85rem !important;
+}
+
+.dashboard-menu a {
+  color: rgba(255, 255, 255, 0.8) !important;
+  border-radius: 10px !important;
+}
+
+.dashboard-menu a:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #ffc145 !important;
 }
 
 .dashboard-menu a:hover,
@@ -2403,17 +2398,6 @@ nav a::after {
   cursor: pointer;
 }
 
-.dashboard-menu a,
-.dashboard-menu button,
-.dashboard-menu p {
-  color: white;
-  padding: 8px;
-  text-align: left;
-  background: none;
-  border: none;
-  text-decoration: none;
-  cursor: pointer;
-}
 
 .dashboard-menu.show {
   display: flex;
@@ -3330,7 +3314,11 @@ body.admin #admin-panel {
     position: absolute;
     top: 70px;
     right: 10px;
-    background: var(--crimson-violet);
+    background: #1a1228 !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 16px !important;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5) !important;
+    padding: 1rem !important;
     flex-direction: column;
     align-items: flex-start;
     padding: 1rem;
