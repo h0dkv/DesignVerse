@@ -92,20 +92,36 @@ async function renderFavorites(favs, uid) {
 
 /* ---------------- AUTH STATE ---------------- */
 onAuthStateChanged(auth, async (user) => {
-  if (!favListEl) return;
 
-  if (!user) {
-    favListEl.innerHTML = `<p style="color:rgba(255,255,255,0.6)">Трябва да сте <a href="auth.html" style="color:var(--accent)">логнати</a>, за да виждате любимите модели.</p>`;
-    if (clearBtn) clearBtn.style.display = "none";
-    if (countEl) countEl.textContent = "";
-    return;
+  // Рендер на favorites страницата
+  if (favListEl) {
+    if (!user) {
+      favListEl.innerHTML = `<p style="color:rgba(255,255,255,0.6)">Трябва да сте <a href="auth.html" style="color:var(--accent)">логнати</a>, за да виждате любимите модели.</p>`;
+      if (clearBtn) clearBtn.style.display = "none";
+      if (countEl) countEl.textContent = "";
+      return;
+    }
+    const favorites = await getUserFavorites(user.uid);
+    renderFavorites(favorites, user.uid);
   }
 
-  const favorites = await getUserFavorites(user.uid);
-  renderFavorites(favorites, user.uid);
+  // Маркирай бутоните за вече добавени модели (каталог + model pages)
+  if (user) {
+    const favorites = await getUserFavorites(user.uid);
+    document.querySelectorAll(".fav-btn").forEach(btn => {
+      // Model detail страница — чете data-name
+      const name = btn.dataset.name
+        || btn.closest(".catalog-card, .card")?.querySelector("h3")?.textContent?.trim();
+      if (name && favorites.some(f => f.title === name)) {
+        btn.innerHTML = "💚 В любими";
+        btn.disabled = true;
+        btn.style.opacity = "0.7";
+      }
+    });
+  }
 });
 
-/* ---------------- FAV BUTTON (от каталога) ---------------- */
+/* ---------------- FAV BUTTON (каталог + model страница) ---------------- */
 document.addEventListener("click", async (e) => {
   const btn = e.target.closest(".fav-btn");
   if (!btn) return;
@@ -116,15 +132,51 @@ document.addEventListener("click", async (e) => {
     return;
   }
 
-  const card = btn.closest(".catalog-card, .card");
-  const item = {
-    title: card.querySelector("h3")?.textContent || "Без заглавие",
-    img: card.querySelector("img")?.src || "",
-    file: card.querySelector("a[download]")?.getAttribute("href") || null
-  };
+  let item;
+
+  // ── Случай 1: model detail страница (data-name / data-img атрибути на бутона)
+  if (btn.dataset.name) {
+    item = {
+      title: btn.dataset.name,
+      img: btn.dataset.img || "",
+      file: btn.dataset.file || document.querySelector("a[download]")?.getAttribute("href") || null
+    };
+
+    // ── Случай 2: каталог карта (.catalog-card или .card)
+  } else {
+    const card = btn.closest(".catalog-card, .card");
+    if (!card) {
+      showToast("Грешка при четене на модела.", "error");
+      return;
+    }
+    item = {
+      title: card.querySelector("h3")?.textContent?.trim() || "Без заглавие",
+      img: card.querySelector("img")?.src || "",
+      file: card.querySelector("a[download]")?.getAttribute("href") || null
+    };
+  }
+
+  // Провери дали вече е добавено
+  const favorites = await getUserFavorites(user.uid);
+  const alreadyAdded = favorites.some(f => f.title === item.title);
+
+  if (alreadyAdded) {
+    showToast(`„${item.title}" вече е в любими.`, "error");
+    btn.innerHTML = "💚 В любими";
+    return;
+  }
 
   await addFavorite(user.uid, item);
-  btn.innerHTML = "💚";
+
+  // Визуална обратна връзка
+  btn.innerHTML = "💚 В любими";
+  btn.disabled = true;
+  btn.style.opacity = "0.7";
+
+  // Покажи fav-msg ако съществува (в model страницата)
+  const favMsg = document.getElementById("fav-msg");
+  if (favMsg) { favMsg.style.display = "block"; }
+
   showToast(`Добавено в любими: ${item.title}`);
 });
 
